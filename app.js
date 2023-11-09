@@ -56,23 +56,26 @@ function displayForm(){
             if (haveRead[i].checked){
                 read = haveRead[i].id
             }
-            if(myLibrary[i].title == this.title){
+            if(this.title == myLibrary[i].title){
                 alert('This book is already in your library.')
             }
         }
         
         let newBook = new Book(title.value, author.value, pages.value, read)
         myLibrary.push(newBook)
+        console.log(newBook)
 
         books.innerHTML= ""
         
         for (let i=0; i < myLibrary.length; i++){
             let card = document.createElement('div')
             let cardInfo = document.createElement('p')
-            let books = document.querySelector('.books')
+            let removeBtn = document.createElement("button")
+            removeBtn.classList.add('remove')
             card.classList.add('card')
             bookContent.appendChild(card)
             card.appendChild(cardInfo)
+            card.appendChild(removeBtn)
             cardInfo.classList.add('info')
             cardInfo.innerText = myLibrary[i].info()
             console.log(myLibrary.length)
@@ -80,7 +83,12 @@ function displayForm(){
             let formContainer = document.querySelector('.form')
             formContainer.classList.add("hidden")
             let form = document.querySelector('.addABook')
-
+            
             form.reset()
+
         })
-    
+
+        let remove = document.querySelector('.remove')
+        remove.addEventListener('click', function(){
+            console.log('removed')
+        })
